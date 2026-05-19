@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <h2>Médicos</h2>
+    <a class="button" href="{{ url_for('doctor.crear') }}">Agregar médico</a>
+    <table>
+        <thead>
+            <tr><th>Nombre</th><th>Especialidad</th><th>Teléfono</th><th>Correo</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctores %}
+            <tr>
+                <td>{{ doctor.nombre }}</td>
+                <td>{{ doctor.especialidad }}</td>
+                <td>{{ doctor.telefono }}</td>
+                <td>{{ doctor.correo }}</td>
+                <td>
+                    <a href="{{ url_for('doctor.editar', doctor_id=doctor.id) }}">Editar</a>
+                    <a class="danger" href="{{ url_for('doctor.eliminar', doctor_id=doctor.id) }}">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No hay médicos registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

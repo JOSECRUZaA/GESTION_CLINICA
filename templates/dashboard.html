@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard">
+    <h2>Panel administrativo</h2>
+    <div class="cards">
+        <div class="card">
+            <strong>{{ total_doctores }}</strong>
+            <span>Médicos registrados</span>
+        </div>
+        <div class="card">
+            <strong>{{ total_pacientes }}</strong>
+            <span>Pacientes registrados</span>
+        </div>
+        <div class="card">
+            <strong>{{ total_consultas }}</strong>
+            <span>Consultas agendadas</span>
+        </div>
+    </div>
+    <div class="quick-links">
+        <a class="button" href="{{ url_for('doctor.crear') }}">Registrar médico</a>
+        <a class="button" href="{{ url_for('patient.crear') }}">Registrar paciente</a>
+        <a class="button" href="{{ url_for('consulta.crear') }}">Registrar consulta</a>
+        <a class="button" href="{{ url_for('report.index') }}">Ver reportes</a>
+    </div>
+</section>
+{% endblock %}

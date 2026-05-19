@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <h2>Consultas</h2>
+    <div class="form-inline">
+        <form method="get" action="{{ url_for('consulta.index') }}">
+            <label>Filtrar por fecha</label>
+            <input type="date" name="fecha" value="{{ fecha }}" />
+            <button type="submit">Buscar</button>
+        </form>
+        <a class="button" href="{{ url_for('consulta.crear') }}">Agregar consulta</a>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Fecha</th><th>Médico</th><th>Paciente</th><th>Diagnóstico</th><th>Tratamiento</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            {% for consulta in consultas %}
+            <tr>
+                <td>{{ consulta.fecha.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ consulta.doctor.nombre }}</td>
+                <td>{{ consulta.paciente.nombre }}</td>
+                <td>{{ consulta.diagnostico }}</td>
+                <td>{{ consulta.tratamiento }}</td>
+                <td>
+                    <a href="{{ url_for('consulta.editar', consulta_id=consulta.id) }}">Editar</a>
+                    <a class="danger" href="{{ url_for('consulta.eliminar', consulta_id=consulta.id) }}">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6">No hay consultas.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
